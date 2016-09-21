@@ -1,0 +1,29 @@
+{
+    "name": "fwolf/uuid",
+    "description": "Time Based UUID Generator",
+    "type": "library",
+    "keywords": [
+        "time based",
+        "uuid"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fwolf",
+            "email": "fwolf.aide+uuid.php@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fwolf\\Util\\Uuid\\": "src/Uuid/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FwolfTest\\Util\\Uuid\\": "tests/Uuid/"
+        }
+    }
+}
