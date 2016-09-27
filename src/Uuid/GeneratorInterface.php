@@ -10,8 +10,6 @@ namespace Fwolf\Util\Uuid;
  *
  * Length of each part, separator are different by algorithms.
  *
- * Check digit is default off for speedup.
- *
  * @copyright   Copyright 2015-2016 Fwolf
  * @license     http://opensource.org/licenses/MIT MIT
  */
@@ -20,44 +18,29 @@ interface GeneratorInterface
     /**
      * Explain each part of an UUID
      *
-     * @param   string  $uuid
-     * @param   boolean $withCheckDigit Source includes check digit
+     * @param   string $uuid
      * @return  array
      */
-    public function explain($uuid, $withCheckDigit = false);
+    public function explain($uuid);
 
 
     /**
      * Generate an UUID
      *
-     * If $checkDigit is true, use last byte or bytes as check digits.
-     *
-     * Normally group below 10(what ever base) should reserve for develop/test
-     * environment.
+     * Normally group 0 should reserve for develop/test environment.
      *
      * @param   int|string $groupId
      * @param   string     $custom
-     * @param   boolean    $checkDigit
      * @return  string
      */
-    public function generate(
-        $groupId = '1',
-        $custom = '',
-        $checkDigit = false
-    );
+    public function generate($groupId = '1', $custom = '');
 
 
     /**
      * Verify if an UUID is valid
      *
-     * Without checkDigit, UUID can only verified by a few constraint like
-     * compare its length with definition.
-     *
-     * With checkDigit, UUID can be verified by re-compute check digits.
-     *
-     * @param   string  $uuid
-     * @param   boolean $withCheckDigit Source include check digits
+     * @param   string $uuid
      * @return  boolean
      */
-    public function verify($uuid, $withCheckDigit = false);
+    public function verify($uuid);
 }
