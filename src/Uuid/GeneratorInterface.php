@@ -19,7 +19,7 @@ interface GeneratorInterface
      * Explain each part of an UUID
      *
      * @param   string $uuid
-     * @return  array
+     * @return  Explanation
      */
     public function explain($uuid);
 

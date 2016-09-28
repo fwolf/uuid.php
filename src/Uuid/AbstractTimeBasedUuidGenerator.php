@@ -1,9 +1,4 @@
 <?php
-/**
- * @copyright   Copyright 2016 Fwolf
- * @license     http://opensource.org/licenses/MIT MIT
- *
- */
 namespace Fwolf\Util\Uuid;
 
 /**
@@ -20,24 +15,9 @@ namespace Fwolf\Util\Uuid;
 abstract class AbstractTimeBasedUuidGenerator implements GeneratorInterface
 {
     /**
-     * Array key for explain result
+     * Name of class to store explanation information
      */
-    const COL_SECOND = 'second';
-
-    const COL_MICROSECOND = 'microSecond';
-
-    const COL_GROUP = 'group';
-
-    const COL_CUSTOM = 'custom';
-
-    const COL_RANDOM = 'random';
-
-    const COL_CHECK_DIGIT = 'checkDigit';
-
-    /**
-     * Is verify success
-     */
-    const COL_VERIFY = 'verify';
+    const EXPLANATION_CLASS = Explanation::class;
 
     /**
      * Total UUID length
@@ -146,22 +126,26 @@ abstract class AbstractTimeBasedUuidGenerator implements GeneratorInterface
                 0,
                 static::LENGTH_RANDOM - static::LENGTH_CHECK_DIGIT
             );
-            $verify = $this->verify($uuid);
+            $verified = $this->verify($uuid);
         } else {
             $checkDigit = '';
-            $verify = true;
+            $verified = true;
         }
 
 
-        return [
-            static::COL_SECOND      => $second,
-            static::COL_MICROSECOND => $microSecond,
-            static::COL_GROUP       => $group,
-            static::COL_CUSTOM      => $custom,
-            static::COL_RANDOM      => $random,
-            static::COL_CHECK_DIGIT => $checkDigit,
-            static::COL_VERIFY      => $verify,
-        ];
+        $className = static::EXPLANATION_CLASS;
+        /** @var Explanation $explanation */
+        $explanation = (new $className);
+
+        $explanation->setSecond($second)
+            ->setMicrosecond($microSecond)
+            ->setGroup($group)
+            ->setCustom($custom)
+            ->setRandom($random)
+            ->setCheckDigit($checkDigit)
+            ->setVerified($verified);
+
+        return $explanation;
     }
 
 

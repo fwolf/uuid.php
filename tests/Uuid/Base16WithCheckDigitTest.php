@@ -29,9 +29,7 @@ class Base16WithCheckDigitTest extends PHPUnitTestCase
         $generator = $this->buildMock();
 
         $uuid = $generator->generate();
-        $infoAr = $generator->explain($uuid);
-        $this->assertTrue(
-            0 < strlen($infoAr[Base16WithCheckDigit::COL_CHECK_DIGIT])
-        );
+        $explanation = $generator->explain($uuid);
+        $this->assertNotEmpty($explanation->getCheckDigit());
     }
 }

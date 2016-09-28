@@ -43,16 +43,10 @@ class AbstractTimeBasedUuidGeneratorTest extends PHPUnitTestCase
         $uuid = $generator->generate('24', 'halo');
         $this->assertTrue($generator->verify($uuid));
 
-        $infoAr = $generator->explain($uuid);
-        $this->assertEquals(
-            '0024',
-            $infoAr[AbstractTimeBasedUuidGenerator::COL_GROUP]
-        );
-        $this->assertEquals(
-            'halo',
-            $infoAr[AbstractTimeBasedUuidGenerator::COL_CUSTOM]
-        );
-        $this->assertTrue($infoAr[AbstractTimeBasedUuidGenerator::COL_VERIFY]);
+        $explanation = $generator->explain($uuid);
+        $this->assertEquals('0024', $explanation->getGroup());
+        $this->assertEquals('halo', $explanation->getCustom());
+        $this->assertTrue($explanation->isVerified());
     }
 
 
@@ -63,8 +57,8 @@ class AbstractTimeBasedUuidGeneratorTest extends PHPUnitTestCase
         $uuid = $generator->generate('24', 'halo');
         $this->assertTrue($generator->verify($uuid));
 
-        $infoAr = $generator->explain($uuid);
-        $this->assertTrue($infoAr[AbstractTimeBasedUuidGenerator::COL_VERIFY]);
+        $explanation = $generator->explain($uuid);
+        $this->assertTrue($explanation->isVerified());
     }
 
 

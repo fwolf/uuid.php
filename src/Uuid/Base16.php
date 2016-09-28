@@ -73,15 +73,16 @@ class Base16 extends AbstractTimeBasedUuidGenerator
      */
     public function explain($uuid)
     {
-        $infoAr = parent::explain($uuid);
+        $explanation = parent::explain($uuid);
 
-        $second = $infoAr[static::COL_SECOND];
+        $second = $explanation->getSecond();
         $second = base_convert($second, 16, 10);
-        $infoAr[static::COL_SECOND] = date('Y-m-d H:i:s', $second);
+        $explanation->setSecond(date('Y-m-d H:i:s', $second));
 
-        $infoAr[static::COL_MICROSECOND] =
-            base_convert($infoAr[static::COL_MICROSECOND], 16, 10) * 2;
+        $explanation->setMicrosecond(
+            base_convert($explanation->getMicrosecond(), 16, 10) * 2
+        );
 
-        return $infoAr;
+        return $explanation;
     }
 }
