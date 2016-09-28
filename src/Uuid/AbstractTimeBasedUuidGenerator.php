@@ -249,8 +249,7 @@ abstract class AbstractTimeBasedUuidGenerator implements GeneratorInterface
         $microSecond = substr(
             str_repeat('0', $len) .
             base_convert(round($timeAr[0] * 100000 / 2), 10, 16),
-            0,
-            $len
+            -1 * $len
         );
 
         return [$second, $microSecond];
