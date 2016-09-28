@@ -175,10 +175,17 @@ abstract class AbstractTimeBasedUuidGenerator implements GeneratorInterface
      */
     protected function generateCustomPart($custom = '')
     {
-        $scriptName = strval(filter_input(INPUT_SERVER, 'SCRIPT_NAME'));
-        $scriptName = md5(strval($scriptName));
+        if (static::LENGTH_CUSTOM <= strlen($custom)) {
+            $str = $custom;
 
-        $customPart = substr($custom . $scriptName, 0, static::LENGTH_CUSTOM);
+        } else {
+            // Need fill length with something contains machine signature
+            $scriptName = strval(filter_input(INPUT_SERVER, 'SCRIPT_NAME'));
+            $scriptName = md5(strval($scriptName));
+            $str = $custom . $scriptName;
+        }
+
+        $customPart = substr($str, 0, static::LENGTH_CUSTOM);
 
         return $customPart;
     }

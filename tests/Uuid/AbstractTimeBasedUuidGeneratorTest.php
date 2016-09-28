@@ -54,11 +54,13 @@ class AbstractTimeBasedUuidGeneratorTest extends PHPUnitTestCase
     {
         $generator = $this->buildMockWithCheckDigit();
 
-        $uuid = $generator->generate('24', 'halo');
+        // And custom param is empty
+        $uuid = $generator->generate('24', '');
         $this->assertTrue($generator->verify($uuid));
 
         $explanation = $generator->explain($uuid);
         $this->assertTrue($explanation->isVerified());
+        $this->assertNotEquals('halo', $explanation->getCustom());
     }
 
 
