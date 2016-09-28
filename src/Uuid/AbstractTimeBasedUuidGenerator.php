@@ -231,14 +231,14 @@ abstract class AbstractTimeBasedUuidGenerator implements GeneratorInterface
      */
     protected function generateTimeParts()
     {
-        $timeAr = explode(' ', microtime());
+        list($microSecond, $second) = explode(' ', microtime());
 
         // 8 chars timestamp second, hex mode
         // 2030-12-31 = 1924876800 = 0x72bb4a00
         // 0xffffff = 4294967295 = 2106-02-07 14:28:15
         $len = static::LENGTH_SECOND;
         $second = substr(
-            str_repeat('0', $len) . base_convert($timeAr[1], 10, 16),
+            str_repeat('0', $len) . base_convert($second, 10, 16),
             -1 * $len
         );
 
@@ -248,7 +248,7 @@ abstract class AbstractTimeBasedUuidGenerator implements GeneratorInterface
         $len = static::LENGTH_MICROSECOND;
         $microSecond = substr(
             str_repeat('0', $len) .
-            base_convert(round($timeAr[0] * 100000 / 2), 10, 16),
+            base_convert(round($microSecond * 100000 / 2), 10, 16),
             -1 * $len
         );
 
