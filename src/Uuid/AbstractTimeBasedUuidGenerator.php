@@ -197,9 +197,10 @@ abstract class AbstractTimeBasedUuidGenerator implements GeneratorInterface
      */
     protected function generateCustomPartAuto()
     {
-        $scriptName = strval(filter_input(INPUT_SERVER, 'SCRIPT_NAME'));
+        $seed = strval(filter_input(INPUT_SERVER, 'SCRIPT_NAME')) .
+            php_uname();
 
-        return md5(strval($scriptName));
+        return md5($seed);
     }
 
 
