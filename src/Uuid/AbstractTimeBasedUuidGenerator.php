@@ -126,11 +126,11 @@ abstract class AbstractTimeBasedUuidGenerator implements GeneratorInterface
                 0,
                 static::LENGTH_RANDOM - static::LENGTH_CHECK_DIGIT
             );
-            $verified = $this->verify($uuid);
         } else {
             $checkDigit = '';
-            $verified = true;
         }
+
+        $verified = $this->verify($uuid);
 
 
         $className = static::EXPLANATION_CLASS;
