@@ -175,19 +175,31 @@ abstract class AbstractTimeBasedUuidGenerator implements GeneratorInterface
      */
     protected function generateCustomPart($custom = '')
     {
-        if (static::LENGTH_CUSTOM <= strlen($custom)) {
-            $str = $custom;
-
-        } else {
-            // Need fill length with something contains machine signature
-            $scriptName = strval(filter_input(INPUT_SERVER, 'SCRIPT_NAME'));
-            $scriptName = md5(strval($scriptName));
-            $str = $custom . $scriptName;
+        if (static::LENGTH_CUSTOM > strlen($custom)) {
+            $custom .= $this->generateCustomPartAuto();
         }
 
-        $customPart = substr($str, 0, static::LENGTH_CUSTOM);
+        return substr($custom, 0, static::LENGTH_CUSTOM);
+    }
 
-        return $customPart;
+
+    /**
+     * Generate custom part if not assigned from param
+     *
+     * Get something contains machine signature, used for custom part if needed
+     *
+     * Suggest generate from machine signature, got same result for one machine
+     * or environment, but random is also OK.
+     *
+     * Result length should >= custom part, will be used from left.
+     *
+     * @return  string
+     */
+    protected function generateCustomPartAuto()
+    {
+        $scriptName = strval(filter_input(INPUT_SERVER, 'SCRIPT_NAME'));
+
+        return md5(strval($scriptName));
     }
 
 
