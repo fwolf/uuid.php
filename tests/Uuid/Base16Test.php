@@ -28,8 +28,9 @@ class Base16Test extends PHPUnitTestCase
     {
         $generator = $this->buildMock();
 
-        $uuid = $generator->generate();
+        $uuid = '57eb6c44-8df0-0001-60b4-331757be44d3';
         $infoAr = $generator->explain($uuid);
-        $this->assertRegExp('/[\d-]+ [\d:]+/', $infoAr[Base16::COL_SECOND]);
+        $this->assertEquals('2016-09-28 15:07:48', $infoAr[Base16::COL_SECOND]);
+        $this->assertEquals('72672', $infoAr[Base16::COL_MICROSECOND]);
     }
 }
