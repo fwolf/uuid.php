@@ -110,16 +110,18 @@ class Base36 extends AbstractTimeBasedUuidGenerator
     }
 
 
+    /** @noinspection SpellCheckingInspection */
     /**
      * {@inheritdoc}
      *
-     * Parent method result md5, here only need 10 digit of them.
-     *      base_convert('z{7}', 36, 16) = 123ede3fff
+     * Parent method result md5, here only need 9 digit of them.
+     *      base_convert('f{8}', 16, 36) = 5e5fvsp
+     *      base_convert('f{9}', 16, 36) = 2eaf24s9
      */
     protected function generateCustomPartAuto()
     {
         $seed = parent::generateCustomPartAuto();
-        $seed = substr($seed, 0, 10);
+        $seed = substr($seed, 0, 9);
 
         // In case convert result not fulfill the length
         return base_convert($seed, 16, 36) . '0000000';
