@@ -136,7 +136,7 @@ class Base36 extends AbstractTimeBasedUuidGenerator
         // base_convert('zzz', 36, 10) = 46655
         // base_convert('100', 36, 10) = 1296
         $randomPart = base_convert(mt_rand(1296, 46655), 10, 36) .
-            base_convert(mt_rand(1296, 46655), 10, 36);
+            base_convert(mt_rand(0, 46655), 10, 36);
 
         return $randomPart;
     }
