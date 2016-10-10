@@ -11,3 +11,7 @@ install:
 
 script:
   - phpunit --coverage-text
+
+
+before_script:
+  - echo 'date.timezone = "Asia/Shanghai"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini

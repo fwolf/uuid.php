@@ -26,6 +26,8 @@ class Base36Test extends PHPUnitTestCase
 
     public function testExplain()
     {
+        date_default_timezone_set('Asia/Shanghai');
+
         $generator = $this->buildMock();
 
         $uuid = $generator->generate();
