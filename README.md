@@ -33,7 +33,11 @@ Check digit can determine if an UUID is valid, maybe useful.
 | Base62               | Fwolf\Util\Uuid\Base62               |   24   | 1BTD4N3MsO01qbPidY17hfOz             |
 | Base62Short          | Fwolf\Util\Uuid\Base62Short          |   15   | 10L1XTQ9s1Ip2Og                      |
 
-This class can be inherit and tweak by change class constant.
+By inherit these classes and modify constant value, you can:
+
+- Define length of each part
+- Enable check digit
+- Change of enable/disable separator between parts
 
 
 ## Usage
