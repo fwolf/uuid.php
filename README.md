@@ -52,6 +52,12 @@ echo "Generated UUID: {$uuid}";
 // Result: Generated UUID: 1bjzaogobg01b0tjd6q2qx6t9
 ```
 
+There are some utility scripts in `bin` directory:
+
+- `explain.php` Disassemble UUID to parts and generated time
+- `find-offset-base36.php` Find latest offset timestamp for Base36
+- `find-offset-base62Short.php` Find latest offset timestamp for Base36Short
+
 
 ## License
 
