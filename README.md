@@ -19,7 +19,7 @@ Check digit can determine if an UUID is valid, maybe useful.
 
 ## Install
 
-    composer require fwolf/uuid:~1.0
+    composer require fwolf/uuid:~1.1
 
 
 ## UUID Types
